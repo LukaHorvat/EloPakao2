@@ -1,0 +1,18 @@
+{
+  "name": "Elopakao2",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies":{
+  	"express": "*",
+  	"jade": "*",
+  	"stylus": "*",
+  	"nib": "*"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}
