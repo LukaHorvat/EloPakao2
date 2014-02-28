@@ -34,7 +34,7 @@ app.configure(function() {
 //endregion
 
 app.get("/", function (req, res) {
-	res.render("index");
+	res.render("pages/index");
 });
 
 app.listen(8442);

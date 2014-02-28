@@ -1,0 +1,19 @@
+doctype html
+html(lang="hr")
+	head
+		block head-dependencies
+			link(href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css')
+			link(rel="stylesheet" href="css/bootstrap.css")
+			link(rel="stylesheet" href="css/global.css")
+	body
+		block body-dependencies
+			script(src="http://code.jquery.com/jquery-1.10.1.min.js")
+			script(src="http://code.jquery.com/jquery-migrate-1.2.1.min.js")
+			script(src="js/bootstrap.js")
+			script(src="js/init.js")
+		#header
+			include static/navbar
+		#content
+			block content
+		#footer
+			include static/footer
