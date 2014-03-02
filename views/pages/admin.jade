@@ -1,0 +1,22 @@
+extends ../base-layout
+
+append head-dependencies
+	link(rel="stylesheet" href=path + "/css/admin.css")
+
+append body-dependencies
+	script(src=path + "/js/admin.js")
+
+block content
+	#options.dropdown
+		ul.dropdown-menu(role="menu")
+			li(role="presentation")
+				a(role="menuitem" tabindex="-1" href="javascript:undefined" target="articles") Articles
+			li(role="presentation")
+				a(role="menuitem" tabindex="-1" href="javascript:undefined" target="system") System
+	.panel.panel-default#control-panel
+		.panel-body
+			.control-panel-pane#articles
+				include panes/articles
+			.control-panel-pane#system
+				include panes/system
+
