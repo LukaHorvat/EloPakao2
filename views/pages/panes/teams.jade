@@ -1,0 +1,18 @@
+h3 Teams
+br
+.dropdown#team-list
+	ul.dropdown-menu
+		each team in teams
+			li(role="presentation")
+				a(role="menuitem" tabindex="-1" href="javascript:undefined" id=team._id).team-item= team.name
+br(clear="all")
+br
+form(role="form" method="post" action=path + "/addteam")#team-form
+	.form-group
+		label(for="team-title") Name
+		input.form-control#team-title(type="text" placeholder="Enter name" name="team-title")
+	.form-group
+		label(for="team-date") Members
+		input.form-control#team-title(type="text" placeholder="day.month.year hour:minute" name="team-date")
+	.form-group
+		button.btn.btn-success(type="submit")#team-submit Add

@@ -1,0 +1,11 @@
+{
+    "sources" : [
+        "index.ts"
+    ],
+    "compileOnSave": false,
+    
+    "target": "ES5",
+    "module": "commonjs",
+    "outDir": "./",
+    "noImplicitAny": true
+}

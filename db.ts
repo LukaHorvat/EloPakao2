@@ -1,5 +1,13 @@
 var mongoose = require("mongoose");
 
-var Article = mongoose.model("Article", { title: String, text: String, time: Date });
-
-exports.Article = Article;
+exports.Article = mongoose.model("Article", { title: String, text: String, time: Date });
+exports.Tournament = mongoose.model("Tournament", { 
+	name: String, 
+	date: Date, 
+	participants: [mongoose.Types.ObjectId] //Teams
+});
+exports.Team = mongoose.model("Team", {
+	name: String,
+	registrationDate: Date,
+	members: [String]
+});

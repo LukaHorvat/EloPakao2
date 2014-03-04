@@ -1,0 +1,18 @@
+h3 Tournaments
+br
+.dropdown#tournament-list
+	ul.dropdown-menu
+		each tournament in tournaments
+			li(role="presentation")
+				a(role="menuitem" tabindex="-1" href="javascript:undefined" id=tournament._id).tournament-item= tournament.name
+br(clear="all")
+br
+form(role="form" method="post" action=path + "/addtournament")#tournament-form
+	.form-group
+		label(for="tournament-name") Name
+		input.form-control#tournament-name(type="text" placeholder="Enter name" name="tournament-name")
+	.form-group
+		label(for="tournament-date") Date
+		input.form-control#tournament-date(type="text" placeholder="day.month.year hour:minute" name="tournament-date")
+	.form-group
+		button.btn.btn-success(type="submit")#tournament-submit Add

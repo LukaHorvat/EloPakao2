@@ -30,6 +30,11 @@ app.configure(function () {
 });
 
 //endregion
+app.locals.path = app.path();
+app.locals.capitalize = function (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+};
+
 paths(app); //Process paths
 
 mongoose.connect("mongodb://localhost/test");
