@@ -6,14 +6,17 @@ var db = require("./db");
 
 function paths(app) {
     //Precompile CMS
-    var files = fs.readdirSync(__dirname + "/views/pages/panes");
-    var precompiledOptions = {};
-    for (var i = 0; i < files.length; ++i) {
-        var name = files[i].substr(0, files[i].indexOf("."));
-        var path = __dirname + "/views/pages/panes/" + files[i];
-        var source = fs.readFileSync(path);
-        precompiledOptions[name] = jade.compile(source, { filename: path });
-    }
+    var panePath = __dirname + "/views/pages/pane.jade";
+    var precompiledPane;
+    var recompilePane = function () {
+        precompiledPane = jade.compile(fs.readFileSync(panePath).toString(), { filename: panePath });
+    };
+    recompilePane();
+    fs.watch(panePath, recompilePane);
+
+    var capitalize = function (str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    };
 
     app.get("/", function (req, res) {
         res.render("pages/index");
@@ -26,68 +29,102 @@ function paths(app) {
     });
 
     app.get("/admin", function (req, res) {
-        db.Article.find(function (err, articles) {
-            db.Tournament.find(function (err, tournaments) {
-                db.Team.find(function (err, teams) {
-                    var locals = {
-                        articles: articles,
-                        tournaments: tournaments,
-                        teams: teams
-                    };
-                    var options = {};
-                    for (var name in precompiledOptions) {
-                        options[name] = precompiledOptions[name](locals);
-                    }
-                    locals.options = options;
+        var modelNames = [];
+        for (var key in db.schema) {
+            if (db.schema[key].adminOption) {
+                modelNames.push(key);
+            }
+        }
+        var modelIndex = 0;
 
-                    res.render("pages/admin", locals);
-                });
+        var options = {};
+        var callback = function (err, items) {
+            var displayField = db.schema[modelNames[modelIndex]].adminOption.displayField;
+            for (var i = 0; i < items.length; ++i)
+                items[i].displayName = items[i][displayField];
+            options[modelNames[modelIndex]] = precompiledPane({
+                items: items,
+                itemTypeName: modelNames[modelIndex].toLowerCase(),
+                itemType: db.schema[modelNames[modelIndex]].fields,
+                path: app.locals.path,
+                capitalize: app.locals.capitalize
             });
-        });
-    });
 
-    app.get("/getarticle/:id", function (req, res) {
-        db.Article.findOne({ _id: mongoose.Types.ObjectId(req.param("id")) }, function (err, article) {
-            if (err) {
-                console.log("Unknown article " + req.param("id"));
-                res.end();
+            modelIndex++;
+            if (modelIndex == modelNames.length) {
+                res.render("pages/admin", { options: options });
             } else {
-                res.end(JSON.stringify(article));
+                db[modelNames[modelIndex]].find(callback);
+            }
+        };
+        db[modelNames[0]].find(callback);
+    });
+
+    app.post("/add/:model", function (req, res, next) {
+        var capital = capitalize(req.param("model"));
+        var obj = {};
+        for (var field in db.schema[capital].fields) {
+            obj[field] = null;
+        }
+        var item = new db[capital](obj);
+        item.save(function (err, obj) {
+            if (err) {
+                console.log(err);
+                res.end("Error");
+            } else {
+                req.url = "/edit/" + req.param("model") + "/" + obj._id;
+                next();
             }
         });
     });
 
-    app.post("/editarticle/:id", function (req, res) {
-        db.Article.findOne({ _id: mongoose.Types.ObjectId(req.param("id")) }, function (err, article) {
-            if (err) {
-                console.log("Unknown article " + req.param("id"));
-                res.end();
+    app.get("/get/:model/:id", function (req, res) {
+        var capital = capitalize(req.param("model"));
+        var returnObject = {};
+        var model = db.schema[capital];
+        db[capital].findOne({ _id: mongoose.Types.ObjectId(req.param("id")) }, function (err, article) {
+            for (var field in model.fields) {
+                if (model.fields[field].adminField) {
+                    var encoder = model.fields[field].adminField.encoder || function (x) {
+                        return x;
+                    };
+                    returnObject[req.param("model") + "-" + field] = {
+                        type: model.fields[field].adminField.inputType,
+                        value: encoder(article[field])
+                    };
+                }
             }
-            article.title = req.body["article-title"];
-            article.text = req.body["article-text"];
-            article.time = new Date();
+            res.end(JSON.stringify(returnObject));
+        });
+    });
+
+    app.post("/edit/:model/:id", function (req, res) {
+        var capital = capitalize(req.param("model"));
+        var model = db.schema[capital];
+        db[capital].findOne({ _id: mongoose.Types.ObjectId(req.param("id")) }, function (err, article) {
+            for (var field in model.fields) {
+                if (model.fields[field].adminField) {
+                    var decoder = model.fields[field].adminField.decoder || function (x) {
+                        return x;
+                    };
+                    article[field] = decoder(req.body[req.param("model") + "-" + field]);
+                }
+            }
             article.save(function (err) {
                 if (err)
                     console.log(err);
-                res.redirect("/admin");
+                res.redirect("/admin#" + capital);
             });
         });
     });
 
-    app.post("/addarticle", function (req, res) {
-        var article = new db.Article({
-            title: req.body["article-title"],
-            text: req.body["article-text"],
-            time: new Date()
-        });
-        article.save(function (err) {
+    app.get("/remove/:model/:id", function (req, res) {
+        var capital = capitalize(req.param("model"));
+        db[capital].remove({ _id: mongoose.Types.ObjectId(req.param("id")) }, function (err) {
             if (err)
                 console.log(err);
-            res.redirect("/admin");
+            res.redirect("/admin#" + capital);
         });
-    });
-
-    app.post("/addtournament", function (req, res) {
     });
 }
 

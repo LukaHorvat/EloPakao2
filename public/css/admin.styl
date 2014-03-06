@@ -17,6 +17,12 @@
 	width 200px
 	margin 0
 
+.dropdown-menu li
+	height 26px
+
+.dropdown-menu a
+	line-height 26px
+
 .dropdown-menu a:focus
 	outline none
 
@@ -26,9 +32,30 @@
 .control-panel-pane
 	display none
 
-#article-list *
+#item-list .dropdown-menu
 	display block
 	position relative
 
-#article-list > ul
+#item-list li
+#item-list .dropdown-menu
+	display block
+	position relative
+
+#item-list > ul
 	width 100%
+
+.item-remove
+	position absolute !important
+	top 0
+	right 0
+	margin-right 5px
+	height 20px
+	margin-top 4px
+	width 20px
+	padding-left 2px
+	padding-top 0px
+	display none
+
+.item-remove:hover
+.dropdown-menu a:hover + .item-remove
+	display block

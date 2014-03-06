@@ -1,0 +1,85 @@
+{
+	"Article": {
+		"fields": {
+			"title": {
+				"type": "String",
+				"adminField": {
+					"visual": "Title",
+					"inputType": "textfield",
+					"placeholder": "Enter title"
+				}
+			},
+			"text": {
+				"type": "String",
+				"adminField": {
+					"visual": "Content",
+					"inputType": "multiline",
+					"placeholder": "Enter content"
+				}
+			},
+			"time": {
+				"type": "Date"
+			}
+		},
+		"adminOption": {
+			"displayField": "title"
+		}
+	},
+	"Tournament": {
+		"fields": {
+			"name": {
+				"type": "String",
+				"adminField": {
+					"visual": "Name",
+					"inputType": "textfield",
+					"placeholder": "Enter name"
+				}
+			},
+			"date": {
+				"type": "Date",
+				"adminField": {
+					"visual": "Date",
+					"inputType": "textfield",
+					"placeholder": "DD.MM.YY hh:mm"
+				}
+			},
+			"participants": {
+				"type": ["String"],
+				"adminField": {
+					"visual": "Participants",
+					"inputType": "textfield",
+					"placeholder": "team name,..."
+				}
+			}
+		},
+		"adminOption": {
+			"displayField": "name"
+		}
+	},
+	"Team": {
+		"fields": {
+			"name": {
+				"type": "String",
+				"adminField": {
+					"visual": "Name",
+					"inputType": "textfield",
+					"placeholder": "Enter name"
+				}
+			},
+			"registrationDate": {
+				"type": "Date"
+			},
+			"members": {
+				"type": ["ObjectId"],
+				"adminField": {
+					"visual": "Members",
+					"inputType": "textfield",
+					"placeholder": "summoner name,..."
+				}
+			}
+		},
+		"adminOption": {
+			"displayField": "name"
+		}
+	}
+}
