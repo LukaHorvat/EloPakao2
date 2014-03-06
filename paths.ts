@@ -121,6 +121,10 @@ function paths (app: express.Application) {
 			res.redirect("/admin#" + capital);
 		})
 	});
+
+    app.get("/calendar", function (req, res) {
+        res.render("pages/calendar");
+    });
 }
 
 export = paths;
