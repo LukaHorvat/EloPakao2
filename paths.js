@@ -89,6 +89,10 @@ function paths(app) {
 
     app.post("/addtournament", function (req, res) {
     });
+
+    app.get("/calendar", function (req, res) {
+        res.render("pages/calendar");
+    });
 }
 
 module.exports = paths;
