@@ -126,6 +126,10 @@ function paths(app) {
             res.redirect("/admin#" + capital);
         });
     });
+
+    app.get("/calendar", function (req, res) {
+        res.render("pages/calendar");
+    });
 }
 
 module.exports = paths;
