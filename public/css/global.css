@@ -72,6 +72,6 @@ h6 {
 textarea {
   resize: none;
 }
-.dropdown-menu > li > a:hover {
-  background-color: #f0f0f0;
+.nav .dropdown-menu {
+  box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.2);
 }
