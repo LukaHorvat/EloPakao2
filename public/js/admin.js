@@ -3,6 +3,7 @@ $(document).ready(function () {
 		//Switch pane
 		$(".control-panel-pane").css("display", "none");
 		$("#" + this.attributes["option-target"].value).css("display", "block");
+		history.pushState(null, null, "#" + this.attributes["option-target"].value);
 		resizeFn();
 	});
 

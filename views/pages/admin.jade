@@ -11,7 +11,7 @@ block content
 		ul.dropdown-menu(role="menu")
 			each html, name in options
 				li(role="presentation")
-					a(role="menuitem" tabindex="-1" href="#"+name option-target=name)= name
+					a(role="menuitem" tabindex="-1" href="javascript:undefined" option-target=name)= name
 	.panel.panel-default#control-panel
 		.panel-body
 			each html, name in options

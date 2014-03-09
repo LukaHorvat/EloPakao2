@@ -14,9 +14,10 @@ html(lang="hr")
 		block body-dependencies
 			script(src=path + "/js/bootstrap.js")
 			script(src=path + "/js/init.js")
-		#header
-			include static/navbar
-		#content
-			block content
+		#centered-content
+			#header
+				include static/navbar
+			#content
+				block content
 		#footer
 			include static/footer
