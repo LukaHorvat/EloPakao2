@@ -1,5 +1,8 @@
 var footerHeight = 0;
 var resizeFn = function () {
+	//outerWidth could potentially cause problems
+	$("#centered-content").css("width", (window.outerWidth - 50) + "px");
+
 	var footerY = $("#footer").offset().top;
 	var documentHeight = $(window).height();
 	if (footerY + footerHeight < documentHeight) {
