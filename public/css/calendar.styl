@@ -1,20 +1,17 @@
+@import "global"
+
 body
 	margin 0px
-	color #C2BF74
-	background-color #5E9469
 
 // CALENDAR CALENDAR CALENDAR
 _item-width = 120
 _item-height = 70
 
 .calendar
-	background-color #3E877D
 	margin-top 20px
 	margin-left auto
 	margin-right auto
 	width (7 * _item-width + 30)px
-	border 2px solid #27544E
-	border-radius 2px
 
 
 //// CALENDAR HEADER
@@ -56,7 +53,10 @@ _item-height = 70
 	text-align right
 	font-size small
 .calendar-item
-	border-radius 3px
-	background-color #336E65
-	width 95%
-	height 95%
+	padding-top 20px
+	height inherit
+	width inherit
+	background-color _gray-light
+.event
+	width inherit
+	height 20px

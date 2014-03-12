@@ -11,18 +11,18 @@ block content
 	.calendar
 		.calendar-header
 			.calendar-head-left Hihihi
-			.calendar-head-center Year Month
+			.calendar-head-center Test ing
 			.calendar-head-right Ulala
 		.calendar-table
 			.calendar-head
 				.calendar-row
-					.calendar-column Ponedjeljak
-					.calendar-column Utorak
-					.calendar-column Srijeda
-					.calendar-column Četvrtak
-					.calendar-column Petak
-					.calendar-column Subota
-					.calendar-column Nedjelja
+					.calendar-column input
+					.calendar-column output
+					.calendar-column vars
+					.calendar-column javascript
+					.calendar-column jade
+					.calendar-column stylus
+					.calendar-column node
 			.calendar-body
 				each i in [0,1,2,3,4,5]
 					.calendar-row
@@ -30,3 +30,4 @@ block content
 							div(id = "calendar-cell-" + (i*7+j)).calendar-column
 								.calendar-number #{i*7+j}
 								.calendar-item
+									

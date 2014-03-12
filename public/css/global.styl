@@ -1,5 +1,49 @@
+// Superhero 3.1.1
+// Variables
+// --------------------------------------------------
+
+//== Colors
+//
+//## Gray and brand colors for use across Bootstrap.
+
+_gray-darker =           #222
+// #222
+_gray-dark =             #333
+// #333
+_gray =                  #555
+// #555
+_gray-light =            #4E5D6C   
+// #999
+_gray-lighter =          #EBEBEB 
+// #eee
+
+_primary =         #DF691A
+_primary-darker =  darken(_primary, 13.5%)
+_primary-lighten = lighten(_primary, 13.5%)
+
+_success =         #5cb85c
+_success-darker =  darken(_success, 13.5%)
+_success-lighter = lighten(_success, 13.5%)
+
+_info =            #5bc0de
+_info-darker =     darken(_info, 13.5%)
+_info-lighter =    lighten(_info, 13.5%)
+
+_warning =         #f0ad4e
+_warning-darker =  darken(_warning, 13.5%)
+_warning-lighter = lighten(_warning, 13.5%)
+
+_danger =          #d9534f
+_danger-darker =   darken(_danger, 13.5%)
+_danger-lighter =  lighten(_danger, 13.5%)
+
+_body-bg =         #2B3E50
+// --------------------------------------------------
+// --------------------------------------------------
+
 body
-	background-color #2b3e50
+	//background-color #2b3e50
+	background-color _body-bg
 
 #header
 	width 1000px
@@ -8,7 +52,7 @@ body
 	margin-right auto
 	margin-top 10px
 	margin-bottom 0
-	background-color #4e5d6c
+	background-color _gray-light
 	padding 10px
 
 #content
@@ -17,18 +61,17 @@ body
 	margin-right auto
 	margin-top 10px
 	min-height 500px
-	background-color #4e5d6c
 	padding 10px
 
 #footer
-	background-color #4e5d6c
+	background-color _gray-light
 	width 100%
 	height 100px
 	margin-top 10px
 	padding 10px
 
 a
-	color #ebebeb
+	color _gray-lighter
 	outline none
 
 ul.nav li.dropdown:hover ul.dropdown-menu
