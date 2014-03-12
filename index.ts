@@ -40,15 +40,11 @@ passport.use(new LocalStrategy({
 ));
 
 passport.serializeUser(function (user, done) {
-	console.log("Serialize: ");
-	console.log(user);
 	done(null, user._id);
 });
 
 passport.deserializeUser(function (id, done) {
-	console.log("Attempt deserialize: " + id);
 	db.User.findById(id, function(err, user) {
-		console.log("Deserialize: " + err + ", " + user);
 		done(err, user);
 	});
 });

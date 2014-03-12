@@ -104,6 +104,8 @@ declare module "express" {
              * @param fn
              */
             all(path: string, fn?: (req: Request, res: Response, next: Function) => any): T;
+            
+            all(path: RegExp, fn?: (req: Request, res: Response, next: Function) => any): T;
 
             all(path: string, ...callbacks: Function[]): void;
 
@@ -138,6 +140,8 @@ declare module "express" {
           param(name: any[], fn: Function): Router;
 
           all(path: string, fn?: (req: Request, res: Response, next: Function) => any): Router;
+
+          all(path: RegExp, fn?: (req: Request, res: Response, next: Function) => any): Router;
 
           all(path: string, ...callbacks: Function[]): void;
 

@@ -34,12 +34,12 @@ function paths (app: express.Application) {
 		if (req.user && req.user.email === "darwin226@gmail.com") {
 			next();
 		} else {
-			res.end(401);
+			res.status(401);
+			res.end();
 		}
 	});
 
 	app.get("/admin", function (req, res) {
-		if (req.user) console.log(req.user);
 		var modelNames: string[] = [];
 		for (var key in db.schema) {
 			if (db.schema[key].adminOption) {

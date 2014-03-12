@@ -30,6 +30,15 @@ function paths(app) {
         }
     });
 
+    app.all(/^\/(admin|add|remove|edit|get).*/, function (req, res, next) {
+        if (req.user && req.user.email === "darwin226@gmail.com") {
+            next();
+        } else {
+            res.status(401);
+            res.end();
+        }
+    });
+
     app.get("/admin", function (req, res) {
         if (req.user)
             console.log(req.user);
