@@ -22,8 +22,7 @@ passport.use(new LocalStrategy({
     passwordField: "password"
 }, function (email, password, done) {
     db.User.findOne({ email: email }, function (err, user) {
-        console.log(err);
-        console.log(user);
+        console.log("Login attempt: " + email);
         if (err) {
             return done(err);
         }
@@ -31,13 +30,11 @@ passport.use(new LocalStrategy({
         if (!user) {
             return done(null, false, { message: "Incorrect email" });
         }
-        console.log(password);
-        var hash = bcrypt.hashSync(password);
-        console.log(hash);
         console.log(bcrypt.compareSync(password, user.password));
-        if (hash !== user.password) {
+        if (bcrypt.compareSync(password, user.password)) {
             return done(null, false, { message: "Incorrect password" });
         }
+        console.log("Login success: " + email);
         return done(null, user);
     });
 }));
