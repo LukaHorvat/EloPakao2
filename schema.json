@@ -81,5 +81,28 @@
 		"adminOption": {
 			"displayField": "name"
 		}
+	},
+	"User": {
+		"fields": {
+			"username": {
+				"type": "String",
+				"adminField": {
+					"visual": "Username",
+					"inputType": "textfield",
+					"placeholder": "Enter username"
+				}
+			},
+			"password": {
+				"type": "String",
+				"adminField": {
+					"visual": "Password",
+					"inputType": "textfield",
+					"placeholder": "Enter password hash"
+				}
+			}
+		},
+		"adminOption": {
+			"displayField": "username"
+		}
 	}
 }

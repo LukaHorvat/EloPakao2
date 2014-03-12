@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 var db = require("./db");
 
 function paths(app) {
-    //Precompile CMS
+    //Precompile CMS pane
     var panePath = __dirname + "/views/pages/pane.jade";
     var precompiledPane;
     var recompilePane = function () {
@@ -129,6 +129,10 @@ function paths(app) {
 
     app.get("/calendar", function (req, res) {
         res.render("pages/calendar");
+    });
+
+    app.get("/register", function (req, res) {
+        res.render("pages/register");
     });
 }
 
