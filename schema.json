@@ -84,25 +84,32 @@
 	},
 	"User": {
 		"fields": {
-			"username": {
+			"email": {
 				"type": "String",
 				"adminField": {
-					"visual": "Username",
+					"visual": "Email",
 					"inputType": "textfield",
-					"placeholder": "Enter username"
+					"placeholder": "Enter email"
 				}
 			},
 			"password": {
 				"type": "String",
 				"adminField": {
-					"visual": "Password",
+					"visual": "Password hash",
 					"inputType": "textfield",
 					"placeholder": "Enter password hash"
 				}
+			},
+			"verified": {
+				"type": "Boolean",
+				"adminField": {
+					"visual": "Email verified",
+					"inputType": "toggle"
+				}
 			}
-		},
+ 		},
 		"adminOption": {
-			"displayField": "username"
+			"displayField": "email"
 		}
 	}
 }

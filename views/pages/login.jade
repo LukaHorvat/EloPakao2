@@ -1,0 +1,12 @@
+extends ../base-layout
+
+block content
+	form(role="form" method="post" action=path + "/login")#login-form
+		.form-group
+			label(for="email") Email
+			input.form-control(type="email" placeholder="Unesi email" name="email")#email
+		.form-group
+			label(for="password") Lozinka
+			input.form-control(type="password" placeholder="Unesi lozinku" name="password")#password
+		.form-group
+			button.btn.btn-success(type="submit")#login-submit Prijavi se

@@ -13,6 +13,31 @@ var	stylus = require("stylus"),
 	nib = require("nib");
 var app = express();
 var mongoose = require("mongoose");
+var bcrypt = require("bcrypt-nodejs");
+
+var db = require("./db");
+var passport = require("passport");
+var LocalStrategy = require("passport-local").Strategy;
+
+passport.use(new LocalStrategy({
+		usernameField: "email",
+		passwordField: "password"
+	},
+	function (email, password, done) {
+		db.User.findOne({ email: email }, function (err, user) {
+			console.log("Login attempt: " + email);
+			if (err) { return done(err); };
+			if (!user) {
+				return done(null, false, { message: "Incorrect email" });
+			}
+			if (bcrypt.compareSync(password, user.password)) {
+				return done(null, false, { message: "Incorrect password" });
+			}
+			console.log("Login success: " + email);
+			return done(null, user);
+		});
+	}
+));
 
 var httpPort = 8442;
 var httpsPort = 8443;

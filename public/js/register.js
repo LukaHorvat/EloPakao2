@@ -11,34 +11,50 @@ $(document).ready(function () {
 		if (correct) {
 			$(field).css("background-color", correctColor.toCSS());
 			$(field).attr("data-original-title", "");
-			$(field).tooltip("hide");
-			tooltipVisibility[field] = false;
+			if (tooltipVisibility[message]) { //Make sure you don't close the tooltip if there's another message showing
+				$(field).tooltip("hide");
+				tooltipVisibility[message] = false;
+			}
 		} else {
 			$(field).css("background-color", wrongColor.toCSS());
 			$(field).attr("data-original-title", message); //Tooltip message
-			if (!tooltipVisibility[field]) { //Prevents tooltip flashing when invoking show on a visiable tooltip
+			if (!tooltipVisibility[message]) { //Prevents tooltip flashing when invoking show on a visiable tooltip
 				$(field).tooltip("show");
-				tooltipVisibility[field] = true;
+				tooltipVisibility[message] = true;
 			}
 			$("#register-submit").attr("disabled", true)
 		}
+		return correct
 	}
 
 	var checkForm = function () {
 		$("#register-submit").attr("disabled", false);
 
 		//Email check
-		markField(
+		if (markField(
 			isEmail($("#email").attr("value")), 
 			"#email", 
 			"Nevaljana email adresa"
-		);
+		)) {
+			var currentEmail = $("#email").attr("value");
+			$.post(path + "/emailavailable", { email: $("#email").attr("value") }, function (res) {
+				//If the input email has changed by the time server responded, don't do anything
+				if ($("#email").attr("value") === currentEmail) {
+					var available = JSON.parse(res).available;
+					markField(
+						available,
+						"#email",
+						"Email adresa je već zauzeta"
+					);
+				}
+			});
+		}
 
 		//Password length check		
 		markField(
-			$("#original-password").attr("value").length >= 6, 
+			$("#original-password").attr("value").length >= 8, 
 			"#original-password", 
-			"Lozinka mora imati bar 6 znakova"
+			"Lozinka mora imati bar 8 znakova"
 		);
 
 		//Repeated password check

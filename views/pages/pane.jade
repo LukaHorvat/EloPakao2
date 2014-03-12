@@ -24,5 +24,9 @@ form(role="form" method="post" action=path + "/add/" + itemTypeName id=itemTypeN
 						input.form-control(type="text" placeholder=value.adminField.placeholder name=fieldName id=fieldName)
 					when "multiline"
 						textarea.form-control(placeholder=value.adminField.placeholder rows="20" name=fieldName id=fieldName)
+					when "toggle"
+						br
+						button.btn.btn-danger.toggle-button(hidden-field=fieldName type="button") No
+						input(type="hidden" name=fieldName id=fieldName value="false")
 	.form-group
 		button.btn.btn-success(type="submit" id=itemTypeName + "-submit") Add

@@ -8,11 +8,13 @@
   },
   "dependencies":{
   	"passport": "*",
+    "passport-local": "*",
   	"express": "*",
   	"jade": "*",
   	"stylus": "*",
   	"nib": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "bcrypt-nodejs": "*"
   },
   "repository": "",
   "author": "",

@@ -31,11 +31,38 @@ $(document).ready(function () {
 					case "textfield":
 						select.attr("value", item[field].value);
 						break;
+					case "toggle":
+						select.attr("value", item[field].value.toString());
+						var toggleButton = $(".toggle-button[hidden-field=\"" + field + "\"]");
+						if (item[field].value) {
+							toggleButton.html("Yes");
+							toggleButton.removeClass("btn-danger");
+							toggleButton.addClass("btn-success");
+						} else {
+							toggleButton.html("No");
+							toggleButton.addClass("btn-danger");
+							toggleButton.removeClass("btn-success");
+						}
+						break;
+					default:
+						console.log("Unsupported input type: " + item[field].type);
+						break;
 				}
 			}
 			$("#" + typeName + "-submit").html("Edit"); //Change Add button into Edit
 			$("#" + typeName + "-form").attr("action", path + "/edit/" + typeName + "/" + itemId); //Change form's method from add to edit
 		});
+	});
+
+	$(".toggle-button").click(function () {
+		if ($(this).html() === "Yes") {
+			$(this).html("No");
+			$("#" + $(this).attr("hidden-field")).attr("value", "false");
+		} else {
+			$(this).html("Yes");
+			$("#" + $(this).attr("hidden-field")).attr("value", "true");
+		}
+		$(this).toggleClass("btn-danger btn-success");
 	});
 
 	resizeFn();

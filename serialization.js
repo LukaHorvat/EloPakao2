@@ -12,4 +12,10 @@ exports.addEncodersAndDecoders = function (schema) {
     schema.Tournament.fields.participants.adminField.decoder = function (participants) {
         return participants.split(/, +/);
     };
+    schema.User.fields.verified.encoder = function (verified) {
+        return verified.toString();
+    };
+    schema.User.fields.verified.decoder = function (verified) {
+        return verified === "true";
+    };
 };
