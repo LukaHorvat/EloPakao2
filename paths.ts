@@ -30,7 +30,16 @@ function paths (app: express.Application) {
 		}
 	});
 
+	app.all(/^\/(admin|add|remove|edit|get).*/, function (req, res, next) {
+		if (req.user && req.user.email === "darwin226@gmail.com") {
+			next();
+		} else {
+			res.end(401);
+		}
+	});
+
 	app.get("/admin", function (req, res) {
+		if (req.user) console.log(req.user);
 		var modelNames: string[] = [];
 		for (var key in db.schema) {
 			if (db.schema[key].adminOption) {
@@ -178,10 +187,10 @@ function paths (app: express.Application) {
     });
 
     app.post("/login", passport.authenticate("local", {
-	    	succesRedirect: "/",
-	    	failureRedirect: "/login"
+	    	successRedirect: "/",
+	    	failureRedirect: "/loginFailed"
 	    }
-    ));
+	));
 }
 
 export = paths;

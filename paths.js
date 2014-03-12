@@ -31,6 +31,8 @@ function paths(app) {
     });
 
     app.get("/admin", function (req, res) {
+        if (req.user)
+            console.log(req.user);
         var modelNames = [];
         for (var key in db.schema) {
             if (db.schema[key].adminOption) {
@@ -188,8 +190,8 @@ function paths(app) {
     });
 
     app.post("/login", passport.authenticate("local", {
-        succesRedirect: "/",
-        failureRedirect: "/login"
+        successRedirect: "/",
+        failureRedirect: "/loginFailed"
     }));
 }
 
