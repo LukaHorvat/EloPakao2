@@ -5,15 +5,15 @@ append head-dependencies
 	script(src=path + "/js/register.js")
 
 block content
-	form(role="form" method="post" action=path + "/register")
+	form(role="form" method="post" action=path + "/register")#register-form
 		.form-group
 			label(for="email") Email
-			input.form-control(type="text" placeholder="Unesi email" name="email")
+			input.form-control(type="email" placeholder="Unesi email" name="email" data-toggle="tooltip")#email
 		.form-group
 			label(for="password") Lozinka
-			input.form-control(type="password" placeholder="Unesi lozinku" name="password")#original-password
+			input.form-control(type="password" placeholder="Unesi lozinku" name="password" data-toggle="tooltip")#original-password
 		.form-group
 			label(for="password") Ponovljena lozinka
-			input.form-control(type="password" placeholder="Ponovi lozinku")#repeat-password
+			input.form-control(type="password" placeholder="Ponovi lozinku" data-toggle="tooltip")#repeat-password
 		.form-group
-			button.btn.btn-success(type="submit") Prijavi
+			button.btn.btn-success(type="submit")#register-submit Prijavi

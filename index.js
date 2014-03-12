@@ -23,7 +23,6 @@ app.locals.capitalize = function (str) {
 
 //Redirect all HTTP traffic to HTTPS
 app.use(function (req, res, next) {
-    console.log(req.secure);
     if (!req.secure) {
         console.log("HTTP request for " + req.url + ". Redirecting to " + app.locals.path + req.url);
         return res.redirect(app.locals.path + req.url);
