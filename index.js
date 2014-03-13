@@ -1,21 +1,22 @@
-/// <reference path="node/node.d.ts" />
-/// <reference path="express/express.d.ts" />
-/// <reference path="./paths.ts" />
-/// <reference path="./db.ts" />
 var os = require("os");
 var express = require("express");
-var paths = require("./paths");
 var https = require("https");
 var http = require("http");
 var fs = require("fs");
-var stylus = require("stylus"), nib = require("nib");
-var app = express();
+var stylus = require("stylus");
+var nib = require("nib");
 var mongoose = require("mongoose");
 var bcrypt = require("bcrypt-nodejs");
-
-var db = require("./db");
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
+var app = express();
+
+//Set globals
+GLOBAL.ObjectId = mongoose.Types.ObjectId;
+GLOBAL.Mixed = mongoose.Types.Mixed;
+
+var db = require("./db");
+var paths = require("./paths");
 
 passport.use(new LocalStrategy({
     usernameField: "email",
@@ -30,7 +31,7 @@ passport.use(new LocalStrategy({
         if (!user) {
             return done(null, false, { message: "Incorrect email" });
         }
-        if (!bcrypt.compareSync(password, user.password)) {
+        if (!user.checkPassword(password)) {
             return done(null, false, { message: "Incorrect password" });
         }
         console.log("Login success: " + email);
