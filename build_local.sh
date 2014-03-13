@@ -1,1 +1,0 @@
-tsc public/init.ts --module "commonjs"

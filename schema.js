@@ -49,7 +49,7 @@ var schema = {
 						return date.getDay() + "." + date.getMonth() + "." + (date.getFullYear() % 100) + " " +
 							date.getHours() + ":" + date.getMinutes();
 					},
-					decoder: function (date: string) {
+					decoder: function (date) {
 						var split = date.split(/[\s:\.]+/);
 						return new Date(2000 + parseInt(split[2]), parseInt(split[1]), parseInt(split[0]), parseInt(split[3]), parseInt(split[4]), 0, 0);
 					}
@@ -61,10 +61,10 @@ var schema = {
 					visual: "Participants",
 					inputType: "textfield",
 					placeholder: "team name,...",
-					encoder: function (participants: string[]) {
+					encoder: function (participants) {
 						return participants.join(", ");
 					},
-					decoder: function (participants: string) {
+					decoder: function (participants) {
 						return participants.split(/, +/);
 					}
 				}
