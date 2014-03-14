@@ -37,6 +37,9 @@ module.exports = {
 					return participants.split(/, +/);
 				}
 			}
+		},
+		bracket: {
+			type: ObjectId
 		}
 	},
 	adminOption: {

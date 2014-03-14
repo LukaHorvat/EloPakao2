@@ -14,7 +14,8 @@
   	"stylus": "*",
   	"nib": "*",
     "mongoose": "*",
-    "bcrypt-nodejs": "*"
+    "bcrypt-nodejs": "*",
+    "async": "*"
   },
   "repository": "",
   "author": "",

@@ -17,12 +17,12 @@ module.exports = function (app) {
     };
 
     app.all(/^\/(admin|add|remove|edit|get).*/, function (req, res, next) {
-        if (req.user && req.user.email === "darwin226@gmail.com") {
+        //if (req.user && req.user.email === "darwin226@gmail.com") {
             next();
-        } else {
+        /*} else {
             res.status(401);
             res.end();
-        }
+        }*/
     });
 
     app.get("/admin", function (req, res) {
@@ -79,7 +79,9 @@ module.exports = function (app) {
         var capital = capitalize(req.param("model"));
         var returnObject = {};
         var model = db.schema[capital];
-        db[capital].findOne({ _id: ObjectId(req.param("id")) }, function (err, article) {
+        db[capital].findById(req.param("id"), function (err, item) {
+            if (err) console.log(err);
+            if (err) console.log(err);
             for (var field in model.fields) {
                 if (model.fields[field].adminField) {
                     var encoder = model.fields[field].adminField.encoder || function (x) {
@@ -87,7 +89,7 @@ module.exports = function (app) {
                     };
                     returnObject[req.param("model") + "-" + field] = {
                         type: model.fields[field].adminField.inputType,
-                        value: encoder(article[field])
+                        value: encoder(item[field])
                     };
                 }
             }
@@ -98,7 +100,7 @@ module.exports = function (app) {
     app.post("/edit/:model/:id", function (req, res) {
         var capital = capitalize(req.param("model"));
         var model = db.schema[capital];
-        db[capital].findOne({ _id: ObjectId(req.param("id")) }, function (err, article) {
+        db[capital].findById(req.param("id"), function (err, article) {
             for (var field in model.fields) {
                 if (model.fields[field].adminField) {
                     var decoder = model.fields[field].adminField.decoder || function (x) {
@@ -117,9 +119,9 @@ module.exports = function (app) {
 
     app.get("/remove/:model/:id", function (req, res) {
         var capital = capitalize(req.param("model"));
-        db[capital].remove({ _id: ObjectId(req.param("id")) }, function (err) {
-            if (err)
-                console.log(err);
+        db[capital].findByIdAndRemove(req.param("id"), function (err) {
+            if (err) console.log(err);
+            
             res.redirect("/admin#" + capital);
         });
     });

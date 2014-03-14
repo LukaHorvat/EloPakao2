@@ -19,7 +19,7 @@ module.exports = {
 			}
 		},
 		verified: {
-			type: Boolean,
+			type: { type: Boolean, default: false },
 			adminField: {
 				visual: "Email verified",
 				inputType: "toggle"
@@ -28,7 +28,7 @@ module.exports = {
 	},
 	methods: {
 		checkPassword: function (password) {
-			return bcrypt.compareSync(password, this.password)
+			return bcrypt.compareSync(password, this.password);
 		}
 	},
 	adminOption: {

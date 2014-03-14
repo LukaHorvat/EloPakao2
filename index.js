@@ -12,10 +12,12 @@ var LocalStrategy = require("passport-local").Strategy;
 var app = express();
 
 //Set globals
-GLOBAL.ObjectId = mongoose.Types.ObjectId;
-GLOBAL.Mixed = mongoose.Types.Mixed;
+GLOBAL.ObjectId = mongoose.Schema.Types.ObjectId;
+GLOBAL.Mixed = mongoose.Schema.Types.Mixed;
 
+require("./extensions").extend();
 var db = require("./db");
+require("./testData").fill();
 var paths = require("./paths");
 
 passport.use(new LocalStrategy({
