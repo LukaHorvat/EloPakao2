@@ -1,0 +1,20 @@
+extends ../base-layout
+
+append head-dependencies
+	link(rel="stylesheet" href=path + "/css/admin.css")
+
+append body-dependencies
+	script(src=path + "/js/admin.js")
+
+block content
+	#options.dropdown
+		ul.dropdown-menu(role="menu")
+			each html, name in options
+				li(role="presentation")
+					a(role="menuitem" tabindex="-1" href="javascript:undefined" option-target=name)= name
+	.panel.panel-default#control-panel
+		.panel-body
+			each html, name in options
+				.control-panel-pane(id=name)
+					!= html
+

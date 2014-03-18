@@ -1,0 +1,62 @@
+body
+	margin 0px
+	color #C2BF74
+	background-color #5E9469
+
+// CALENDAR CALENDAR CALENDAR
+_item-width = 120
+_item-height = 70
+
+.calendar
+	background-color #3E877D
+	margin-top 20px
+	margin-left auto
+	margin-right auto
+	width (7 * _item-width + 30)px
+	border 2px solid #27544E
+	border-radius 2px
+
+
+//// CALENDAR HEADER
+.calendar-header
+	margin-left 15px
+	margin-right 15px
+.calendar-header > *
+	display inline-block
+	height 40px
+.calendar-head-left
+	width 25%
+	text-align left
+.calendar-head-center
+	width 50%
+	text-align center
+.calendar-head-right
+	width 25%
+	text-align right
+
+//// CALENDAR TABLE
+
+.calendar-table
+	width (7 * _item-width)px
+	margin-right 15px
+	margin-left 15px
+	margin-bottom 5px
+.calendar-head > .calendar-row
+	height (_item-height - 40)px
+	text-align center
+.calendar-body > .calendar-row
+	height (_item-height)px
+.calendar-column
+	display inline-block
+	width (_item-width)px
+	height inherit
+.calendar-number
+	position absolute
+	width (_item-width - 10)px
+	text-align right
+	font-size small
+.calendar-item
+	border-radius 3px
+	background-color #336E65
+	width 95%
+	height 95%

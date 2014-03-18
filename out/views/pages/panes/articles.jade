@@ -1,0 +1,18 @@
+h3 Articles
+br
+.dropdown#article-list
+	ul.dropdown-menu
+		each article in articles
+			li(role="presentation")
+				a(role="menuitem" tabindex="-1" href="javascript:undefined" id=article._id).article-item= article.title
+br(clear="all")
+br
+form(role="form" method="post" action=path + "/addarticle")#article-form
+	.form-group
+		label(for="article-title") Title
+		input.form-control#article-title(type="text" placeholder="Enter title" name="article-title")
+	.form-group
+		label(for="article-text") Content
+		textarea.form-control#article-text(placeholder="Enter content" rows="20" name="article-text")
+	.form-group
+		button.btn.btn-success(type="submit")#article-submit Add

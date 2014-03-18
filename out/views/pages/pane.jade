@@ -1,0 +1,32 @@
+h3= capitalize(itemTypeName)
+br
+.dropdown#item-list
+	ul.dropdown-menu
+		each item in items
+			li(role="presentation")
+				a.item(role="menuitem" tabindex="-1" href="javascript:undefined" item-id=item._id item-type=itemTypeName)
+					if item.displayName
+						= item.displayName
+					else
+						!= "&nbsp;"
+				button.btn.btn-danger.item-remove(item-id=item._id item-type=itemTypeName)
+					span.glyphicon.glyphicon-remove
+br(clear="all")
+br
+form(role="form" method="post" action=path + "/add/" + itemTypeName id=itemTypeName + "-form")
+	each value, key in itemType
+		if value.adminField
+			.form-group
+				- var fieldName = itemTypeName + "-" + key;
+				label(for=fieldName)= value.adminField.visual
+				case value.adminField.inputType
+					when "textfield"
+						input.form-control(type="text" placeholder=value.adminField.placeholder name=fieldName id=fieldName)
+					when "multiline"
+						textarea.form-control(placeholder=value.adminField.placeholder rows="20" name=fieldName id=fieldName)
+					when "toggle"
+						br
+						button.btn.btn-danger.toggle-button(hidden-field=fieldName type="button") No
+						input(type="hidden" name=fieldName id=fieldName value="false")
+	.form-group
+		button.btn.btn-success(type="submit" id=itemTypeName + "-submit") Add

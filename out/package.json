@@ -1,0 +1,26 @@
+{
+  "name": "Elopakao2",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies":{
+  	"passport": "*",
+    "passport-local": "*",
+  	"express": "*",
+  	"jade": "*",
+  	"stylus": "*",
+  	"nib": "*",
+    "mongoose": "*",
+    "bcrypt-nodejs": "*",
+    "async": "*",
+    "grunt": "*",
+    "coffee-script": "*",
+    "mkdirp": "*"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}
