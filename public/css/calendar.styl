@@ -4,8 +4,8 @@ body
 	margin 0px
 
 // CALENDAR CALENDAR CALENDAR
-_item-width = 120
-_item-height = 70
+_item-width = 140
+_item-height = 80
 
 .calendar
 	margin-top 20px
@@ -33,30 +33,39 @@ _item-height = 70
 
 //// CALENDAR TABLE
 
-.calendar-table
-	width (7 * _item-width)px
-	margin-right 15px
-	margin-left 15px
-	margin-bottom 5px
-.calendar-head > .calendar-row
-	height (_item-height - 40)px
-	text-align center
-.calendar-body > .calendar-row
-	height (_item-height)px
-.calendar-column
-	display inline-block
+.table > tbody > tr > th
+	padding 0px
+	border 0px
 	width (_item-width)px
-	height inherit
+	height (_item-height)px
+
+.table, table
+	width (_item-width * 7)px
+	height (_item-height * 6 + 30)px
+
 .calendar-number
-	position absolute
-	width (_item-width - 10)px
 	text-align right
-	font-size small
+	padding-right 5px
+	height 18px
+
 .calendar-item
-	padding-top 20px
-	height inherit
-	width inherit
-	background-color _gray-light
-.event
-	width inherit
+	padding-left 5px
+	padding-right 5px
+
+.calendar-item > .btn-group > .btn
+	padding 0px
+
+.btn-group
+	width (_item-width - 10)px
 	height 20px
+
+.btn
+	margin 1px
+	width (_item-width - 10)px
+	text-align left
+	font-size 12px
+
+.caret
+	float right
+	margin 5px
+

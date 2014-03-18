@@ -41,10 +41,10 @@ function setupCalendar(){
 		daysEnum.push(i + 1);
 	}
 
-	$(".last-month > .calendar-item, .next-month > .calendar-item").css("opacity", "0.65");
+	$(".last-month, .next-month").css("background-color", "#415262");
 
 	// ADD OPACITY FOR TODAY
-	$("#calendar-cell-" + (lastMonthEndingDay + dateToday.getDate() - 1) + " > .calendar-item").css("opacity", "0.20")
+	$("#calendar-cell-" + (lastMonthEndingDay + dateToday.getDate() - 1)).css("background-color", "#415262");
 
 	console.log(JSON.stringify(daysEnum));
 
@@ -61,16 +61,56 @@ function setupCalendar(){
 		this.minute = minute;
 	}
 	events.push(new newEvent("dvanaesti", 12, 3, 2014, 12, 00));
-	events.push(new newEvent("trinaesti", 13, 3, 2014, 11, 00));
+	events.push(new newEvent("trinaesti", 17, 3, 2014, 11, 00));
 	events.push(new newEvent("sedamnaesti", 17, 3, 2014, 15, 00));
 	events.push(new newEvent("sedamnaestasti", 17, 3, 2014, 16, 00));
+
+	events.sort( function (a,b){
+		if 		(a.year   > b.year) return 1;
+		else if (a.year   < b.year) return -1;
+		else if (a.month  > b.month) return 1;
+		else if (a.month  < b.month) return -1;
+		else if (a.day    > b.day) return 1;
+		else if (a.day    < b.day) return -1;
+		else if (a.hour   > b.hour) return 1;
+		else if (a.hour   < b.hour) return -1;
+		else if (a.minute > b.minute) return 1;
+		else if (a.minute < b.minute) return -1;
+		else if (a.name   > b.name) return 1;
+		else return -1;
+	});
 
 	console.log(JSON.stringify(events));
 
 
 	for (var i = 0; i < events.length; ++i){
+		var color = "primary";
+		if (i > 0) 
+			if (events[i].day == events[i-1].day && events[i].month == events[i-1].month && events[i].year == events[i-1].year)
+				color = "success";
+		if (i > 1)
+			if (events[i].day == events[i-2].day && events[i].month == events[i-2].month && events[i].year == events[i-2].year)
+				color = "info";
+		if (i > 2)
+			if (events[i].day == events[i-3].day && events[i].month == events[i-3].month && events[i].year == events[i-3].year)
+				color = "warning";
+		if (i > 3)
+			if (events[i].day == events[i-4].day && events[i].month == events[i-4].month && events[i].year == events[i-4].year)
+				color = "danger";
+
 		$(".date-" + events[i].day + "-" + events[i].month + "-" + events[i].year + " > .calendar-item")
-			.append("<p class=\"event\">" + events[i].name + "</div>");
+			.append("<div class=\"btn-group\">" + 
+						"<button type=\"button\" class=\"btn btn-" + color + " dropdown-toggle\" data-toggle=\"dropdown\">" +
+							events[i].hour + ":" + events[i].minute + " " + events[i].name + "<span class=\"caret\"></span>" +
+						"</button>" +
+						"<ul class=\"dropdown-menu\" role=\"menu\">" +
+							"<li><a href=\"#\">Action</a></li>" +
+							"<li><a href=\"#\">Another action</a></li>" +
+							"<li><a href=\"#\">Something else here</a></li>" +
+							"<li class=\"divider\"></li>" +
+							"<li><a href=\"#\">Separated link</a></li>" +
+						"</ul>" +
+					"</div>");
 	}
 	
 	//$("#calendar-cell-" + 0 + " > .calendar-item").append("<div class=\"event \"></div>");

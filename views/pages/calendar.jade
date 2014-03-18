@@ -8,26 +8,21 @@ append head-dependencies
 
 block content
 
-	.calendar
-		.calendar-header
-			.calendar-head-left Hihihi
-			.calendar-head-center Test ing
-			.calendar-head-right Ulala
-		.calendar-table
-			.calendar-head
-				.calendar-row
-					.calendar-column input
-					.calendar-column output
-					.calendar-column vars
-					.calendar-column javascript
-					.calendar-column jade
-					.calendar-column stylus
-					.calendar-column node
-			.calendar-body
-				each i in [0,1,2,3,4,5]
-					.calendar-row
-						each j in [0,1,2,3,4,5,6]
-							div(id = "calendar-cell-" + (i*7+j)).calendar-column
-								.calendar-number #{i*7+j}
-								.calendar-item
-									
+
+	table.table.table-striped.table-hover
+		thead
+			tr
+				th Pon
+				th Uto
+				th Sri
+				th Čet
+				th Pet
+				th Sub
+				th Ned
+		tbody
+			each i in [0,1,2,3,4,5]
+				tr
+					each j in [0,1,2,3,4,5,6]
+						th(id = "calendar-cell-" + (i*7+j))
+							.calendar-number #{i*7+j}
+							.calendar-item
