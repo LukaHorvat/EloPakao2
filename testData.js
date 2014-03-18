@@ -16,7 +16,9 @@ module.exports.fill = function () {
 			function (cb) {
 				var teams = ["a", "b", "c", "d", "e", "f", "g", "h"];
 				var bracket = new db.Bracket({
-					teams: teams
+					teams: teams,
+					elimination: "single",
+					bestOf: 1
 				});
 				bracket.events.push({
 					timestamp: new Date(2014, 1),
@@ -33,8 +35,28 @@ module.exports.fill = function () {
 					winner: "a",
 					loser: "c"
 				});
+				bracket.events.push({
+					timestamp: new Date(2014, 4),
+					winner: "e",
+					loser: "f"
+				});
+				bracket.events.push({
+					timestamp: new Date(2014, 5),
+					winner: "g",
+					loser: "h"
+				});
+				bracket.events.push({
+					timestamp: new Date(2014, 6),
+					winner: "e",
+					loser: "g"
+				});
+				bracket.events.push({
+					timestamp: new Date(2014, 7),
+					winner: "e",
+					loser: "a"
+				});
 				bracket.save(function (err, obj) {
-					console.log(obj.generateJSON(new Date(2014, 4)));
+					debug.log(obj.generateJSON(new Date(2014, 4)));
 					var tourny = new db.Tournament({
 						name: "test tourny",
 						date: new Date(),

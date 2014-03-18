@@ -15,7 +15,10 @@
   	"nib": "*",
     "mongoose": "*",
     "bcrypt-nodejs": "*",
-    "async": "*"
+    "async": "*",
+    "grunt": "*",
+    "coffee-script": "*",
+    "mkdirp": "*"
   },
   "repository": "",
   "author": "",

@@ -14,6 +14,20 @@ var app = express();
 //Set globals
 GLOBAL.ObjectId = mongoose.Schema.Types.ObjectId;
 GLOBAL.Mixed = mongoose.Schema.Types.Mixed;
+GLOBAL.debug = {
+    log: function () {
+        var args = Array.prototype.slice.call(arguments);
+        args = args.map(function (obj) {
+            if (typeof obj === "string") return obj;
+            if (obj === null) return "null";
+            if (obj === undefined) return "undefined";
+            if (typeof obj === "object") return JSON.stringify(obj, null, 2);
+            return obj;
+        });
+        fs.writeSync(1, args.join(" "));
+        fs.writeSync(1, "\n");
+    }
+};
 
 require("./extensions").extend();
 var db = require("./db");
@@ -107,3 +121,9 @@ https.createServer({
 }, app).listen(httpsPort);
 
 http.createServer(app).listen(httpPort);
+
+/*
+console.log = function (m) {
+    fs.writeSync(1, m);
+}
+*/
