@@ -9,6 +9,10 @@ var mongoose = require("mongoose");
 var bcrypt = require("bcrypt-nodejs");
 var passport = require("passport");
 var LocalStrategy = require("passport-local").Strategy;
+var logger = require("connect-logger");
+var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser");
+var session = require("express-session");
 var app = express();
 
 //Set globals
@@ -76,20 +80,17 @@ var compile = function (str, path) {
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
-app.use(express.logger('dev'));
+app.use(logger());
 app.use(stylus.middleware({
     src: __dirname + '/public',
     compile: compile
 }));
-app.configure(function () {
-    app.use(express.static('public'));
-    app.use(express.cookieParser());
-    app.use(express.bodyParser());
-    app.use(express.session({ secret: "supersecret" }));
-    app.use(passport.initialize());
-    app.use(passport.session());
-    app.use(app.router);
-});
+app.use(express.static('public'));
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(session({ secret: "supersecret" }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 //endregion
 paths(app); //Process paths

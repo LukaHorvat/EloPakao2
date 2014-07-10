@@ -1,5 +1,6 @@
 var passport = require("passport");
 var db = require("../db");
+var bcrypt = require("bcrypt-nodejs");
 
 module.exports = function (app) {
     var isEmail = function (email) {

@@ -14,7 +14,12 @@
   	"stylus": "*",
   	"nib": "*",
     "mongoose": "*",
-    "bcrypt-nodejs": "*"
+    "bcrypt-nodejs": "*",
+    "connect": "*",
+    "body-parser": "*",
+    "connect-logger": "*",
+    "cookie-parser": "*",
+    "express-session": "*"
   },
   "repository": "",
   "author": "",
